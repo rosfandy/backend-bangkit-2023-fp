@@ -56,7 +56,7 @@
 }
 ```
 
-## Status Codes
+# Status Codes
 
 Api returns the following status codes in its API:
 
