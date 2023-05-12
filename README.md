@@ -1,23 +1,14 @@
 # Backend API
 
 ### Technologies Used
-<p align="center">
-  <a href="https://nodejs.org/" target="_blank" rel="noopener noreferrer">
-    <img width="100" src="https://nodejs.org/static/images/logo.svg" alt="Node.js logo">
-  </a>
-  <a href="https://expressjs.com/" target="_blank" rel="noopener noreferrer">
-    <img width="100" src="https://expressjs.com/images/express-facebook-share.png" alt="Express.js logo">
-  </a>
-  <a href="https://firebase.google.com/" target="_blank" rel="noopener noreferrer">
-    <img width="100" src="https://firebase.google.com/downloads/brand-guidelines/PNG/logo-built_white.png" alt="Firebase logo">
-  </a>
-</p>
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 
 
-
-* [NodeJS](https://nodejs.org/) This is a cross-platform runtime environment built on Chrome's V8 JavaScript engine used in running JavaScript codes on the server. It allows for installation and managing of dependencies and communication with databases.
-* [ExpressJS](https://www.expresjs.org/) This is a NodeJS web application framework.
-* [Firebase](https://firebase.google.com/) This is a free open source NOSQL document database with scalability and flexibility. Data are stored in flexible JSON-like documents.
+* [NodeJS](https://nodejs.org/) : This is a cross-platform runtime environment built on Chrome's V8 JavaScript engine used in running JavaScript codes on the server. It allows for installation and managing of dependencies and communication with databases.
+* [ExpressJS](https://www.expresjs.org/) : This is a NodeJS web application framework.
+* [Firebase](https://firebase.google.com/) : This is a free open source NOSQL document database with scalability and flexibility. Data are stored in flexible JSON-like documents.
 
 
 ## Endpoint
