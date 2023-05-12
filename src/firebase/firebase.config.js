@@ -1,5 +1,5 @@
 const firebase = require("firebase-admin");
-const serviceAccount = require("./bangkit-2023-fp-firebase-adminsdk-1ager-e8f746ec37.json");
+const serviceAccount = require("./serviceAccount.json");
 const filter = require("./firebase.query")
 
 class FirestoreConnection {
