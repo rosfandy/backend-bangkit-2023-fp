@@ -8,7 +8,7 @@
     "dev": "nodemon ./src/server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "rosfandy",
+  "author": "bangkit-2023-fp",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -22,5 +22,5 @@
     "morgan": "^1.10.0",
     "nanoid": "^4.0.2"
   },
-  "repository": "https://github.com/rosfandy/express-template"
+  "repository": "https://github.com/rosfandy/backend-bangkit-2023-fp"
 }
