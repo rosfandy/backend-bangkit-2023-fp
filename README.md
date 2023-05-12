@@ -7,7 +7,7 @@
 
 
 # Endpoint
-### 1. Users Activity
+## 1. Users Activity
 | Methods | Endpoints | Action | Authorization |
 | --- | --- | --- | --- |
 | GET | /api/user/profile | To get the details of user profile | yes
@@ -17,44 +17,19 @@
 | POST | /api/user/logout | To logout an existing user activity | no
 | PUT | /api/user/profile | To update an existing user profile | yes
 
+## 2. Forum Activity
+| Methods | Endpoints | Action | Authorization |
+| --- | --- | --- | --- |
+| GET | /api/forum/:id/posts | To get the post by id | no
+| GET |  /api/forum/posts | To get all post of forum | no
+| POST | /api/forum/user/posts | To create user  post | yes
+| PUT | /api/forum/user/posts | To update user post | yes
+| DELETE | /api/forum/user/posts | To delete user  post | yes
 
-## ```POST```
-### 1.  ```/api/user/register``` <br>
-**Body Request**    : username, email, password <br>
-***Authorization*** : -  <br>
-**Response** :
-```JSON
-{
-    "status"  : 201,
-    "message" : "Register success ! "
-}
-```
-### 2.  ```/api/user/login``` <br>
-**Body Request**    : email, password <br>
-***Authorization*** : -  <br>
-**Response** :
-```JSON
-{
-    "status"  : 200,
-    "message" : "Login success ! ",
-    "user"   : [
-      {
-        "username": "username",
-        "token" : "token"
-      }
-    ]
-}
-```
-### 3.  ```/api/user/logout``` <br>
-**Body Request**    : email <br>
-***Authorization*** : -  <br>
-**Response** :
-```JSON
-{
-    "status"  : 200,
-    "message" : "Logout success ! ",
-}
-```
+## 2. Image Predict
+| Methods | Endpoints | Action | Authorization |
+| --- | --- | --- | --- |
+| POST | /api/predict | send data image to models predict | yes
 
 # Status Codes
 
