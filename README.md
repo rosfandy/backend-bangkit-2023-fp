@@ -60,7 +60,7 @@
 }
 ```
 #### 3.  `/api/user/logout` <br>
-**Body Request**    : email <br>
+**Body Request**    : user_id <br>
 ***Authorization*** : -  <br>
 **Response** :
 ```JSON
