@@ -31,7 +31,47 @@
 | --- | --- | --- | --- |
 | POST | `/api/predict` | send data image to models predict | yes
 
-# Status Codes
+## `POST`
+#### 1.  `/api/user/register` <br>
+**Body Request**    : username, email, password <br>
+***Authorization*** : -  <br>
+**Response** :
+```JSON
+{
+    "status"  : 201,
+    "message" : "Register success ! "
+}
+```
+#### 2.  `/api/user/login` <br>
+**Body Request**    : email, password <br>
+***Authorization*** : -  <br>
+**Response** :
+```JSON
+{
+    "status"  : 200,
+    "message" : "Login success ! ",
+    "user"   : [
+      {
+        "username": "username",
+        "token" : "token"
+      }
+    ]
+}
+```
+#### 3.  `/api/user/logout` <br>
+**Body Request**    : email <br>
+***Authorization*** : -  <br>
+**Response** :
+```JSON
+{
+    "status"  : 200,
+    "message" : "Logout success ! ",
+}
+```
+
+
+
+## Status Codes
 
 Api returns the following status codes in its API:
 
