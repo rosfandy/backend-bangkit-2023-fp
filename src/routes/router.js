@@ -8,6 +8,7 @@ const usersController = require('../controllers/users')
 // ENDPOINT
 router.get('/', message.helloworld)
 router.post('/api/register', usersController.register)
+router.post('/api/login', usersController.login)
 
 
 /* Example for (message: testing)
