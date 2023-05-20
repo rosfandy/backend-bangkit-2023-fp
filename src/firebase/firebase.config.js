@@ -50,6 +50,13 @@ class FirestoreConnection {
 
     return mainDocs;
   }
+
+  async getUserByEmail(email, collection) {
+    const conditions = { field: 'email', operator: '==', value: email };
+    const users = await this.getCollectionData(collection, conditions);
+    return users[0]; // Mengembalikan pengguna pertama yang sesuai dengan email
+  }
+
 }
 
 

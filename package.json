@@ -20,7 +20,8 @@
     "http": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
-    "nanoid": "^4.0.2"
+    "nanoid": "^4.0.2",
+    "nodemon": "^2.0.22"
   },
   "repository": "https://github.com/rosfandy/backend-bangkit-2023-fp"
 }
