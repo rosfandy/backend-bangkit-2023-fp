@@ -57,6 +57,17 @@ class FirestoreConnection {
     return users[0]; // Mengembalikan pengguna pertama yang sesuai dengan email
   }
 
+  async updateCollectionData(collection, documentId, newData) {
+    try {
+      const docRef = this.db.collection(collection).doc(documentId);
+      await docRef.update(newData);
+      console.log(`Document with ID ${documentId} in collection ${collection} successfully updated.`);
+    } catch (error) {
+      console.error(`Error updating document with ID ${documentId} in collection ${collection}:`, error);
+      throw error;
+    }
+  }
+
 }
 
 

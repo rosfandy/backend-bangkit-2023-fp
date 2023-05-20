@@ -1,29 +1,46 @@
 const firestoreConnection = require("../firebase/firebase.config");
 const firebase = require('../firebase/firebase.module')
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
+const moment = require('moment-timezone')
 
+require('dotenv').config(); 
 
 exports.register = async function(req, res) {
   try {
     const { username, email, password } = req.body;
     const connection = new firestoreConnection();
-    const dataEmail = await connection.getCollectionData("users", { 
+    const existingEmail = await connection.getCollectionData("users", { 
         field: "email", 
         operator: "==", 
         value: email 
     });
-    const dataUname = await connection.getCollectionData("users", { 
+    const existingUsername = await connection.getCollectionData("users", { 
         field: "username", 
         operator: "==", 
         value: username 
     });
 
-    if (dataEmail.length || dataUname.length) {
-        return res.status(400).json({ message: dataEmail.length ? "Email telah terdaftar !" : "Username telah terdaftar !", status: 400 });
+    if (existingEmail.length || existingUsername.length) {
+        return res.status(400).json({ message: existingEmail.length ? "Email telah terdaftar !" : "Username telah terdaftar !", status: 400 });
     }
 
-    const data = { email, username, password };
-    await firebase.createCollectionData("users", data);
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const userId = uuidv4();
+    const date = moment().tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm:ss')
+
+    const userData = { 
+        userId, 
+        email, 
+        username, 
+        password: hashedPassword,
+        createdAt: date,
+        updatedAt: date
+    };
+
+    await firebase.createCollectionData("users", userData);
 
     return res.status(200).json({ message: `${username} ditambahkan !`, status: 200 });
   } catch (error) {
@@ -34,56 +51,69 @@ exports.register = async function(req, res) {
 
 exports.login = async function(req, res) {
   try {
-    const {email, password} = req.body;
+    const { email, password } = req.body;
     const connection = new firestoreConnection();
-    const dataEmail = await connection.getCollectionData("users", { 
+    const user = await connection.getCollectionData("users", { 
         field: "email", 
         operator: "==", 
         value: email 
     });
-    const dataPassword = await connection.getCollectionData("users", { 
-        field: "password", 
-        operator: "==", 
-        value: password 
-    });
-    const user = await connection.getUserByEmail(email, "users")
-    console.log(user)
-    if (dataEmail.length) {
-      const token = createToken(email)
-      console.log(token)
-      return res.status(200).json({ message: `${user.username} berhasil login !`, token: token, status: 200 });
+
+    if (user.length !== 0) {
+      const passwordMatch = await bcrypt.compare(password, user[0].password);
+      if (passwordMatch) {
+        const token = createToken(email);
+        const date = moment().tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm:ss');
+
+        // Update token in the user's Firebase document
+        const userDocId = user[0].email; 
+        const updatedData = { token: token, updatedAt: date };
+        await connection.updateCollectionData("users", userDocId, updatedData);
+
+        console.log(token);
+        return res.status(200).json({ message: `${user[0].username} berhasil login !`, token: token, status: 200 });
+      } else {
+        return res.status(401).json({ message: "Password salah!", status: 401 });
+      }
+    } else {
+      return res.status(404).json({ message: "Email tidak ditemukan!", status: 404 });
     }
-
-    // const data = { email, password };
-    // await firebase.createCollectionData("users", data);
-
+    
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Terjadi kesalahan pada server", status: 500 });
   }
 };
 
+exports.getProfile = async function(req, res) {
+  try {
+    const { email } = req.user; // Assuming the email is stored in req.user from the JWT middleware
+    console.log("email-jwt: ",email)
+    const connection = new firestoreConnection();
+    const user = await connection.getUserByEmail(email, "users");
+
+    if (user) {
+      const profile = {
+        username: user.username,
+        email: user.email,
+        userId: user.userId
+      };
+
+      return res.status(200).json(profile);
+    } else {
+      return res.status(404).json({ message: "User not found.", status: 404 });
+    }
+  } catch (error) {
+    console.error("Error retrieving user profile:", error);
+    return res.status(500).json({ message: "Error retrieving user profile.", status: 500 });
+  }
+};
+
+
 function createToken(userEmail) {
   const payload = { email: userEmail };
-  const secretKey = 'your_secret_key';
-
-  const token = jwt.sign(payload, secretKey);
-
-  // const token = 'your_token';
-  console.log(token);
-
-  // const tokenJwt = jwt.verify(token, secretKey, (err, decoded) => {
-  //   if (err) {
-  //     // Token verification failed
-  //     console.error('Invalid token');
-  //   } else {
-  //     // Token is valid
-  //     console.log(decoded);
-  //     // Access decoded properties like decoded.userId or decoded.username
-  //   }
-  // });
-
-  // console.log(tokenJwt)  
+  const token = jwt.sign(payload, process.env.JWT_SECRET,{
+    expiresIn: '120s'
+  });
   return token;
-
 }

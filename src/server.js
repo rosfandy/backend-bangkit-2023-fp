@@ -5,7 +5,7 @@ const morgan    = require('morgan');
 const cors      = require('cors')
 
 const bodyParser = require('body-parser')
-const routes     = require('./routes/router')
+const userRoutes     = require('./routes/user.routes')
 
 const corsConfig = {
   credentials: true,
@@ -20,7 +20,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 
 // routes-module : endpoint
-app.use(routes)
+app.use(userRoutes)
 
 // init server
 const init = ()=>{
