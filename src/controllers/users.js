@@ -95,7 +95,6 @@ exports.getProfile = async function(req, res) {
     const user = await connection.getUserByEmail(email, "users");
 
     if (user) {
-
       const profile = {
         username: user.username,
         email: user.email,

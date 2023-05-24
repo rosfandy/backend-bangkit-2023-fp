@@ -17,12 +17,14 @@ exports.getCollectionData = async (collection,field,operator,value)=> {
 }
 
 // Create Collection Data
-exports.createCollectionData = async (collection,data)=>{
+exports.createCollectionData = async (collection,data,id)=>{
 	let url
 	if(data.username){
 		url = db.collection(collection).doc(data.username);
+	} else if(id){
+		 url = db.collection(collection).doc(id);
 	} else {
-		 url = db.collection(collection).doc();
+		url = db.collection(collection).doc();
 	}
     await url.set(data);	
 }
