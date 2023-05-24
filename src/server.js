@@ -5,7 +5,8 @@ const morgan    = require('morgan');
 const cors      = require('cors')
 
 const bodyParser = require('body-parser')
-const userRoutes     = require('./routes/user.routes')
+const userRoutes = require('./routes/user.routes')
+const articleRoutes = require('./routes/article.routes')
 
 const corsConfig = {
   credentials: true,
@@ -21,6 +22,8 @@ app.use(bodyParser.json());
 
 // routes-module : endpoint
 app.use(userRoutes)
+app.use(articleRoutes)
+
 
 // init server
 const init = ()=>{
@@ -32,6 +35,5 @@ const init = ()=>{
     console.log(`Server is listening on port ${port}`);
   });
 }
-
 
 init();
