@@ -36,6 +36,11 @@
 | --- | --- | --- | --- |
 | POST | `/api/predict` | send data image to models predict | yes
 
+### 2. Articles
+| Methods | Endpoints | Action | Authorization |
+| --- | --- | --- | --- |
+| GET | `/api/articles` | Get Articles | no
+
 ## `POST`
 #### 1.  `/api/user/register` <br>
 **Body Request**    : username, email, password <br>
