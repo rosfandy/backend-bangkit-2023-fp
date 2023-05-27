@@ -17,7 +17,7 @@
 | --- | --- | --- | --- | --- |
 | GET | `/api/user/profile` | To get the details of user profile | yes | ✅
 | GET | `/api/user/history` | To edit the details of a user history activity | yes | ❌
-| GET | `/api/user/refreshtoken` | Get Refresh invalid token | yes | ✅
+| GET | `/api/user/refreshtoken` | Get Refresh Expired Token | yes | ✅
 | POST | `/api/user/register` | To sign up a new user account | no | ✅
 | POST | `/api/user/login` | To login an existing user account | no | ✅
 | PUT | `/api/user/profile` | To update an existing user profile | yes | ❌
