@@ -139,7 +139,7 @@ exports.refreshToken = async (req,res)=>{
     const newToken = createToken(user[0].email)
     const updatedData = { token: newToken, updatedAt: date };
     await firebase.updateCollectionData("users", userDocId, updatedData);
-    res.status(200).json({"token":newToken})
+    res.status(200).json({"refreshToken":newToken})
     
   } catch (error) {
     res.status(400).json({error})
