@@ -39,7 +39,7 @@
 ### 2. Articles
 | Methods | Endpoints | Action | Authorization | Status |
 | --- | --- | --- | --- | --- | 
-| GET | `/api/articles` | Get Articles | no | ❌
+| GET | `/api/articles` | Get Articles | no | ✅
 
 ## `POST`
 #### 1.  `/api/user/register` <br>
