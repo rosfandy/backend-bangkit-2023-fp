@@ -62,7 +62,7 @@
     "message" : "Login success ! ",
     "user"   : [
       {
-        "email" : mail@mail.com,
+        "email" : "mail@mail.com",
         "username": "username",
         "token" : "token"
       }
