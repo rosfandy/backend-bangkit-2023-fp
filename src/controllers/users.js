@@ -142,7 +142,7 @@ exports.refreshToken = async (req,res)=>{
     res.status(200).json({"refreshToken":newToken})
     
   } catch (error) {
-    res.status(400).json({error})
+    res.status(500).json({error})
   }
 } 
 
