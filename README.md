@@ -15,31 +15,31 @@
 ### 1. Users Activity
 | Methods | Endpoints | Action | Authorization | status
 | --- | --- | --- | --- | --- |
-| GET | `/api/user/profile` | To get the details of user profile | yes | done
-| GET | `/api/user/history` | To edit the details of a user history activity | yes | ongoing
-| GET | `/api/user/refreshtoken` | Get Refresh invalid token | yes | done
-| POST | `/api/user/register` | To sign up a new user account | no | done
-| POST | `/api/user/login` | To login an existing user account | no | done
-| PUT | `/api/user/profile` | To update an existing user profile | yes | ongoing
+| GET | `/api/user/profile` | To get the details of user profile | yes | ✅
+| GET | `/api/user/history` | To edit the details of a user history activity | yes | ❌
+| GET | `/api/user/refreshtoken` | Get Refresh invalid token | yes | ✅
+| POST | `/api/user/register` | To sign up a new user account | no | ✅
+| POST | `/api/user/login` | To login an existing user account | no | ✅
+| PUT | `/api/user/profile` | To update an existing user profile | yes | ❌
 
 ### 2. Forum Activity
 | Methods | Endpoints | Action | Authorization | Status |
 | --- | --- | --- | --- | --- |
-| GET | `/api/forum/:id/posts` | To get the post by id | no | ongoing 
-| GET |  `/api/forum/posts` | To get all post of forum | no | ongoing
-| POST | `/api/forum/user/posts` | To create user  post | yes | ongoing
-| PUT | `/api/forum/user/posts` | To update user post | yes | ongoing
-| DELETE | `/api/forum/user/posts` | To delete user  post | yes | ongoing
+| GET | `/api/forum/:id/posts` | To get the post by id | no | ❌ 
+| GET |  `/api/forum/posts` | To get all post of forum | no | ❌
+| POST | `/api/forum/user/posts` | To create user  post | yes | ❌
+| PUT | `/api/forum/user/posts` | To update user post | yes | ❌
+| DELETE | `/api/forum/user/posts` | To delete user  post | yes | ❌
 
 ### 2. Image Predict
 | Methods | Endpoints | Action | Authorization | Status |
 | --- | --- | --- | --- | --- |
-| POST | `/api/predict` | send data image to models predict | yes | ongoing
+| POST | `/api/predict` | send data image to models predict | yes | ❌
 
 ### 2. Articles
 | Methods | Endpoints | Action | Authorization | Status |
 | --- | --- | --- | --- | --- | 
-| GET | `/api/articles` | Get Articles | no | ongoing
+| GET | `/api/articles` | Get Articles | no | ❌
 
 ## `POST`
 #### 1.  `/api/user/register` <br>
