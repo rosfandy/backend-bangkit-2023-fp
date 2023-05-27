@@ -19,7 +19,6 @@
 | GET | `/api/user/history` | To edit the details of a user history activity | yes
 | POST | `/api/user/register` | To sign up a new user account | no
 | POST | `/api/user/login` | To login an existing user account | no
-| POST | `/api/user/logout` | To logout an existing user activity | no
 | PUT | `/api/user/profile` | To update an existing user profile | yes
 
 ### 2. Forum Activity
