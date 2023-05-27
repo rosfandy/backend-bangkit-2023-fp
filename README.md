@@ -41,6 +41,17 @@
 | --- | --- | --- | --- | --- | 
 | GET | `/api/articles` | Get Articles | no | ✅
 
+## `GET`
+#### 1.  `/api/user/refreshtoken` <br>
+**Body Request**    : - <br>
+***Authorization*** : Bearer Token  <br>
+**Response** :
+```JSON
+{
+    "refreshToken" : "token"
+}
+```
+
 ## `POST`
 #### 1.  `/api/user/register` <br>
 **Body Request**    : username, email, password <br>
