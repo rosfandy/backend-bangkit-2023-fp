@@ -69,7 +69,8 @@ exports.login = async function(req, res) {
         const date = moment().tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm:ss');
 
         // Update token in the user's Firebase document
-        const userDocId = user[0].email; 
+        const userDocId = user[0].username; 
+        console.log(userDocId)
         const updatedData = { token: token, updatedAt: date };
         await connection.updateCollectionData("users", userDocId, updatedData);
 
