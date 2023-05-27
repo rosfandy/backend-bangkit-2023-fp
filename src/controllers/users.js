@@ -1,4 +1,3 @@
-const firestoreConnection = require("../firebase/firebase.config");
 const firebase = require('../firebase/firebase.module')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -10,17 +9,16 @@ require('dotenv').config();
 exports.register = async function(req, res) {
   try {
     const { username, email, password } = req.body;
-    const connection = new firestoreConnection();
 
     let isEmail = validateEmail(email)
     if(!isEmail) return res.status(400).json({message: "Email tidak valid !",status:400})
 
-    const existingEmail = await connection.getCollectionData("users", { 
+    const existingEmail = await firebase.getCollectionData("users", { 
         field: "email", 
         operator: "==", 
         value: email 
     });
-    const existingUsername = await connection.getCollectionData("users", { 
+    const existingUsername = await firebase.getCollectionData("users", { 
         field: "username", 
         operator: "==", 
         value: username     
@@ -55,8 +53,7 @@ exports.register = async function(req, res) {
 exports.login = async function(req, res) {
   try {
     const { email, password } = req.body;
-    const connection = new firestoreConnection();
-    const user = await connection.getCollectionData("users", { 
+    const user = await firebase.getCollectionData("users", { 
         field: "email", 
         operator: "==", 
         value: email 
@@ -72,7 +69,7 @@ exports.login = async function(req, res) {
         const userDocId = user[0].username; 
         console.log(userDocId)
         const updatedData = { token: token, updatedAt: date };
-        await connection.updateCollectionData("users", userDocId, updatedData);
+        await firebase.updateCollectionData("users", userDocId, updatedData);
 
         console.log(token);
         return res.status(200).json({ message: `${user[0].username} berhasil login !`, token: token, status: 200 });
@@ -92,9 +89,11 @@ exports.login = async function(req, res) {
 exports.getProfile = async function(req, res) {
   try {
     const { email } = req.user; // Assuming the email is stored in req.user from the JWT middleware
-    const connection = new firestoreConnection();
-    const user = await connection.getUserByEmail(email, "users");
-
+    const user = await firebase.getCollectionData("users", { 
+            field: "email", 
+            operator: "==", 
+            value: email 
+    });
     if (user) {
       const profile = {
         username: user.username,
