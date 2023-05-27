@@ -1,14 +1,12 @@
 const XLSX = require('xlsx');
-const firestoreConnection = require("../firebase/firebase.config");
 const firebase = require('../firebase/firebase.module')
 
 exports.getArticles = async(req,res)=>{
     try {
-        const connection = new firestoreConnection();
-        const articles_intro = await connection.getCollectionData("article_intro");
-        const articles_history = await connection.getCollectionData("article_history");
-        const articles_business = await connection.getCollectionData("article_business");
-        const articles_farming = await connection.getCollectionData("article_farming");
+        const articles_intro = await firebase.getCollectionData("article_intro");
+        const articles_history = await firebase.getCollectionData("article_history");
+        const articles_business = await firebase.getCollectionData("article_business");
+        const articles_farming = await firebase.getCollectionData("article_farming");
         let total = articles_intro.length + articles_history.length + articles_farming.length + articles_business.length
         res.send({total, data:[{
             articles_intro:[{length:articles_intro.length,data:articles_intro}],
@@ -30,7 +28,6 @@ exports.saveArticles = async (req,res)=>{
     const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: ['id','title', 'url', 'gambar'] });
     jsonData.shift(); // Menghapus elemen pertama dari array jsonData
     
-    const connection = new firestoreConnection();
         
     // for (const item of jsonData) {
     //     const itemId = `${sheetName}-${item.id}`; // Menggunakan item.id sebagai ID dokumen
