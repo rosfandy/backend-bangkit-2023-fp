@@ -80,16 +80,6 @@
     ]
 }
 ```
-#### 3.  `/api/user/logout` <br>
-**Body Request**    : user_id <br>
-***Authorization*** : bearer token  <br>
-**Response** :
-```JSON
-{
-    "status"  : 200,
-    "message" : "Logout success ! ",
-}
-```
 
 
 
