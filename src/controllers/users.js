@@ -67,12 +67,16 @@ exports.login = async function(req, res) {
 
         // Update token in the user's Firebase document
         const userDocId = user[0].username; 
-        console.log(userDocId)
+        console.log(user)
         const updatedData = { token: token, updatedAt: date };
         await firebase.updateCollectionData("users", userDocId, updatedData);
 
         console.log(token);
-        return res.status(200).json({ message: `${user[0].username} berhasil login !`, token: token, status: 200 });
+        return res.status(200).json({ message: `Login success !`, status: 200, user:[{
+          "email":user[0].email,
+          "username":user[0].username,
+          "token":token
+        }]});
       } else {
         return res.status(401).json({ message: "Password salah!", status: 401 });
       }
