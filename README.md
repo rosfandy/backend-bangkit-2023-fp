@@ -31,12 +31,12 @@
 | PUT | `/api/forum/user/posts` | To update user post | yes | ❌
 | DELETE | `/api/forum/user/posts` | To delete user  post | yes | ❌
 
-### 2. Image Predict
+### 3. Image Predict
 | Methods | Endpoints | Action | Authorization | Status |
 | --- | --- | --- | --- | --- |
 | POST | `/api/predict` | send data image to models predict | yes | ❌
 
-### 2. Articles
+### 4. Articles
 | Methods | Endpoints | Action | Authorization | Status |
 | --- | --- | --- | --- | --- | 
 | GET | `/api/articles` | Get Articles | no | ✅
