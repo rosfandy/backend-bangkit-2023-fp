@@ -15,7 +15,7 @@ exports.getArticles = async(req,res)=>{
             articles_history:[{length:articles_history.length,data:articles_history}],
         }]})
     } catch (error) {
-        res.send(error).status(400)
+        res.status(400).send(error)
     }
 }
 

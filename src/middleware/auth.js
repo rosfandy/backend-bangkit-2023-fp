@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
+
 require('dotenv').config(); 
+
 
 exports.verifyToken = function (req, res, next) {
   const token = req.headers.authorization?.split(" ")[1];
@@ -27,5 +29,3 @@ exports.verifyToken = function (req, res, next) {
     next();
   });
 }
-
-

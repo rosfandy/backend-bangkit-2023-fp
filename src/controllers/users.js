@@ -77,6 +77,7 @@ exports.login = async function(req, res) {
           "username":user[0].username,
           "token":token
         }]});
+
       } else {
         return res.status(401).json({ message: "Password salah!", status: 401 });
       }
@@ -100,9 +101,9 @@ exports.getProfile = async function(req, res) {
     });
     if (user) {
       const profile = {
-        username: user.username,
-        email: user.email,
-        userId: user.userId
+        username: user[0].username,
+        email: user[0].email,
+        userId: user[0].userId
       };
       return res.status(200).json({status:200, message: "Data found",data:profile});
     } else {
@@ -115,19 +116,45 @@ exports.getProfile = async function(req, res) {
   }
 };
 
+exports.refreshToken = async (req,res)=>{
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) return res.status(403).send({message: "No token provided!"});
+
+  try {
+    const decoded = jwt.decode(token);
+    const email = decoded.email;
+
+    const user = await firebase.getCollectionData("users",{
+      field:"email",
+      operator:"==",
+      value:email
+    })
+    const userToken = user[0].token
+    
+    if(token !== userToken) return res.status(403).json({message:"Token Invalid !"})
+    
+    const userDocId = user[0].username
+    const date = moment().tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm:ss')
+    const newToken = createToken(user[0].email)
+    const updatedData = { token: newToken, updatedAt: date };
+    await firebase.updateCollectionData("users", userDocId, updatedData);
+    res.status(200).json({"token":newToken})
+    
+  } catch (error) {
+    res.status(400).json({error})
+  }
+} 
 
 function createToken(userEmail) {
   const payload = { email: userEmail };
   const token = jwt.sign(payload, process.env.JWT_SECRET,{
-    expiresIn: '120s'
+    expiresIn: '10s'
   });
   return token;
 }
 
 function validateEmail(email) {
-  // Regular expression pattern for email validation
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  // Test the email against the pattern
   return emailPattern.test(email);
 }
