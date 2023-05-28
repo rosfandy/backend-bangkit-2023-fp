@@ -73,7 +73,7 @@ exports.login = async function(req, res) {
 
         console.log(token);
         return res.status(200).json({ message: `Login success !`, status: 200, user:[{
-          "email":user[0].email,
+          "userId":user[0].userId,
           "username":user[0].username,
           "token":token
         }]});
@@ -103,7 +103,9 @@ exports.getProfile = async function(req, res) {
       const profile = {
         username: user[0].username,
         email: user[0].email,
-        userId: user[0].userId
+        userId: user[0].userId,
+        createdAt: user[0].createdAt,
+        updatedAt: user[0].updatedAt,
       };
       return res.status(200).json({status:200, message: "Data found",data:profile});
     } else {
