@@ -121,7 +121,7 @@ exports.getProfile = async function(req, res) {
 exports.refreshToken = async (req,res)=>{
   const token = req.headers.authorization?.split(" ")[1];
 
-  if (!token) return res.status(403).send({message: "No token provided!"});
+  if (!token) return res.status(403).send({message: "No token provided!",status:403});
 
   try {
     const decoded = jwt.decode(token);
@@ -134,7 +134,7 @@ exports.refreshToken = async (req,res)=>{
     })
     const userToken = user[0].token
     
-    if(token !== userToken) return res.status(403).json({message:"Token Invalid !"})
+    if(token !== userToken) return res.status(403).json({message:"Token Invalid !",status:403})
     
     const userDocId = user[0].username
     const date = moment().tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm:ss')
