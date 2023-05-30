@@ -7,6 +7,7 @@ const cors      = require('cors')
 const bodyParser = require('body-parser')
 const userRoutes = require('./routes/user.routes')
 const articleRoutes = require('./routes/article.routes')
+const predictRoutes = require('./routes/predict.routes')
 
 const corsConfig = {
   credentials: true,
@@ -23,6 +24,7 @@ app.use(bodyParser.json());
 // routes-module : endpoint
 app.use(userRoutes)
 app.use(articleRoutes)
+app.use(predictRoutes)
 
 
 // init server

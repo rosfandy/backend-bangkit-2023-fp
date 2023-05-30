@@ -10,6 +10,7 @@ exports.verifyToken = function (req, res, next) {
     if (!token) {
       return res.status(403).send({
         message: "No token provided!",
+        status:403
       });
     }
   
@@ -18,10 +19,12 @@ exports.verifyToken = function (req, res, next) {
         if (err.name === "TokenExpiredError") {
           return res.status(401).send({
             message: "Token expired!",
+            status:401
           });
         } else {
           return res.status(401).send({
             message: "Unauthorized!",
+            status:401
           });
         }
       }
@@ -30,6 +33,6 @@ exports.verifyToken = function (req, res, next) {
       next();
     });
   } catch (error) {
-    res.status(500).json({error})
+    res.status(500).json({message:error,status:500})
   }
 }
