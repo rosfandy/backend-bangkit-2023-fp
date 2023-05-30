@@ -34,7 +34,7 @@
 ### 3. Image Predict
 | Methods | Endpoints | Action | Authorization | Status |
 | --- | --- | --- | --- | --- |
-| POST | `/api/predict` | send data image to models predict | yes | ❌
+| POST | `/api/predict` | send data image to models predict | yes | 🕑
 
 ### 4. Articles
 | Methods | Endpoints | Action | Authorization | Status |
