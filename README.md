@@ -80,6 +80,20 @@
     ]
 }
 ```
+#### 3.  `/api/predict` <br>
+**Body Request**    : img <br>
+***Authorization*** : -  <br>
+**Response** :
+```JSON
+{
+    "success": true,
+    "data": {
+        "message": "Image received and processed successfully.",
+        "predicted_class": 5
+    },
+    "status": 200
+}
+```
 
 
 
