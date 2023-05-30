@@ -5,6 +5,6 @@ const predictController = require("../controllers/predict")
 // Middleware
 const auth = require("../middleware/auth");
 
-router.post("/api/predict",auth.verifyToken,predictController.getPredict)
+router.post("/api/predict",predictController.getPredict)
 
 module.exports = router

@@ -8,10 +8,16 @@ exports.getPredict = async (req, res) => {
       image: image
     });
 
-    console.log(JSON.stringify(response.data));
+    let predicted_class = response.data.predicted_class
+    let virus = "undefined"
+
+    if(predicted_class == 5) virus = "Tomato Mosaic Virus"
+    if(predicted_class == 8) virus = "Tomato Yellow Leaf Curl Virus"
+
+
     res.send({ success: true, data: response.data, status:200 });
   } catch (error) {
     console.log(error);
-    res.status(500).send({ success: false, error: error.message });
+    res.status(500).send({ success: false, error: "Internal Server Error", status:500 });
   }
 };
