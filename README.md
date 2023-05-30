@@ -86,7 +86,7 @@
 {"image":"url"}
 ``` 
 
-***Authorization*** : -  <br>
+***Authorization*** : Bearer Token  <br>
 **Response** :
 ```JSON
 {
