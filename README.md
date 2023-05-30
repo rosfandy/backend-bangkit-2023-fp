@@ -81,7 +81,11 @@
 }
 ```
 #### 3.  `/api/predict` <br>
-**Body Request**    : img <br>
+**Body Request**    : 
+```JSON
+{"image":"url"}
+``` 
+
 ***Authorization*** : -  <br>
 **Response** :
 ```JSON
