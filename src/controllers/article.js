@@ -15,7 +15,7 @@ exports.getArticles = async(req,res)=>{
             articles_history:[{length:articles_history.length,data:articles_history}],
         }]})
     } catch (error) {
-        res.status(400).send(error)
+        res.status(500).json({message:"Internal Server Error",status:500})
     }
 }
 
