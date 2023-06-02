@@ -29,10 +29,10 @@ exports.saveArticles = async (req,res)=>{
     jsonData.shift(); // Menghapus elemen pertama dari array jsonData
     
         
-    // for (const item of jsonData) {
-    //     const itemId = `${sheetName}-${item.id}`; // Menggunakan item.id sebagai ID dokumen
-    //     await firebase.createCollectionData(`${sheetName}`, item, itemId);
-    // }
+    for (const item of jsonData) {
+        const itemId = `${sheetName}-${item.id}`; // Menggunakan item.id sebagai ID dokumen
+        await firebase.createCollectionData(`${sheetName}`, item, itemId);
+    }
     
     res.send(jsonData)
 }
