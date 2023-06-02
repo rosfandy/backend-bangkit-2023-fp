@@ -113,3 +113,38 @@ Api returns the following status codes in its API:
 | 404 | `NOT FOUND` |
 | 500 | `INTERNAL SERVER ERROR` |
 
+## How to Use
+
+1. Make an update.
+    ```
+    sudo apt-get update
+    ```
+2. Clone this repository.
+    ```
+    git clone https://github.com/rosfandy/backend-bangkit-2023-fp.git
+    ```
+3. Install nodejs, python, and packages.
+    ```
+    sudo apt install nodejs && sudo apt install npm
+    sudo apt install python3 && sudo apt install python3-pip
+    ```
+4. Check instalation.
+    ```
+    node --version
+    npm --version
+    python3 --version
+    pip3 --version
+    ```
+5. Install packages.
+    ```
+    npm i
+    pip install Flask tensorflow requests Image numpy
+    ```
+6. Run backend and model.
+    ```
+    TERMINAL 1
+    npm run start
+    TERMINAL 2
+    cd Flask/
+    python3 main.py
+    ```
