@@ -12,12 +12,15 @@ model = tf.keras.models.load_model('./model_self_v2.h5')
 
 @app.route('/model/process', methods=['POST'])
 def predict():
-    data = request.get_json()
+    # data = request.get_json()
 
-    image_url = data['image']
+    # image_url = data['image']
+    image_file = request.files['image']
 
-    response = requests.get(image_url)
-    image = Image.open(BytesIO(response.content))
+    # response = requests.get(image_url)
+    # response = requests.get(image_file)
+    # image = Image.open(BytesIO(response.content))
+    image = Image.open(image_file)
 
     # Preprocess the image (resize, normalize, etc.)
     image = image.resize((150, 150))  # Example: resizing to 150x150 pixels
