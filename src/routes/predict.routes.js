@@ -19,13 +19,16 @@ const apiLimiter = rateLimit({
 	standardHeaders: true,
 	legacyHeaders: false,
 })
+
 // Menggunakan multer untuk memproses multipart/form-data (gambar)
+const storage = multer.memoryStorage();
 const upload = multer({
-  storage: multer.memoryStorage(),
+  storage: storage,
   limits: {
-    fileSize: 5 * 1024 * 1024, // Batas ukuran file (misalnya 5 MB)
+    fileSize: 5 * 1024 * 1024, // 5 MB file size limit
   },
 });
+
 
 
 // Apply the rate limiting 

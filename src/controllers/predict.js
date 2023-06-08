@@ -11,7 +11,7 @@ exports.getPredict = async (req, res, next) => {
   if (!req.file) {
     return res.status(400).send('Tidak ada gambar yang diunggah.');
   }
-
+  console.log(req.file)
   // Membuat nama file unik untuk gambar yang diunggah
   const fileName = `${Date.now()}_${req.file.originalname.replace(/\s/g, '_')}`;
 
