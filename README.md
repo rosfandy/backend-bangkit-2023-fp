@@ -83,7 +83,7 @@
 #### 3.  `/api/predict` <br>
 **Body Request**    : 
 ```JSON
-{"image":"url"}
+{"url":"url"}
 ``` 
 
 ***Authorization*** : Bearer Token  <br>
