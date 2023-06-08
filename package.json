@@ -11,6 +11,7 @@
   "author": "bangkit-2023-fp",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^6.11.0",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
@@ -20,10 +21,12 @@
     "express-rate-limit": "^6.7.0",
     "firebase": "^9.21.0",
     "firebase-admin": "^11.8.0",
+    "form-data": "^4.0.0",
     "http": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
     "moment-timezone": "^0.5.43",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "nanoid": "^4.0.2",
     "nodemon": "^2.0.22",
     "xlsx": "^0.18.5"

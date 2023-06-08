@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const predictController = require("../controllers/predict")
 const rateLimit = require('express-rate-limit')
+const multer = require('multer');
 
 const apiLimiter = rateLimit({
 	windowMs: 60 * 60 * 1000, // 60 minutes
@@ -18,12 +19,21 @@ const apiLimiter = rateLimit({
 	standardHeaders: true,
 	legacyHeaders: false,
 })
+// Menggunakan multer untuk memproses multipart/form-data (gambar)
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024, // Batas ukuran file (misalnya 5 MB)
+  },
+});
+
+
 // Apply the rate limiting 
 router.use('/api/predict', apiLimiter)
 
 // Middleware
 const auth = require("../middleware/auth");
 
-router.post("/api/predict",predictController.getPredict)
+router.post("/api/upload", upload.single('image'), predictController.getPredict)
 
 module.exports = router
