@@ -81,7 +81,7 @@
 }
 ```
 #### 3.  `/api/predict` <br>
-**Body Request**    : form-data images
+**Body Request**    : form-data image
 
 ***Authorization*** : Bearer Token  <br>
 **Response** :
