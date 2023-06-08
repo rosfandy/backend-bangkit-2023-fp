@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "agrohealth",
+  "private_key_id": "8f1f41a8ea30dcca3e7af6eb29399e586e1b93ce",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCXClnYu29e8Q+2\n53LDUCczuLIv/e+NC4q2BLQFswv2QFpJUD688f3PVX+gHvawm4Shkl1VKLxIcEF2\nMC1qDZL37m18dM3nBL32AeSHU9y0F1KUr6vjS1QXl6yofRvjnk+vVMip1YpYxl/f\nI4U+7gGqx2lntAIIvyDdd3Mjef4J93WY7hhW/jEl6ifLj8lGP9YW+vu4y3drkSSj\nLKkcYYxREBclpzieW+fViLhJc0ND+QSZNJbyDPBqwsA/R6G6aySyHO8rY3KHtEFt\neb05VIeFkbHD0zzy/WDgv6sehBeRhVU4CC6xeqcohhvluK97wVmfHzOsX6fG4uv5\nDkT5/oy7AgMBAAECggEADxntVsKSxYrTl+V3L3j9mmm+gxbgExmS0lURDLrUmNfh\nTxAzXZ/SUR8Kxh8iahD6h08Dfua2QIXcvazedYqK5bgUgUuKZK0wMv8IctFbMTRd\nwNj5lh2reDplfGkZ1z22WODguT5M+UhIQJ6kDWEtkH4kl0ZDp804Q3xUajkhwawx\nWOoH+4i00pfgRQE7yxTJz7wVSblpgR9NjGhOqz1HKtt57g33slnNV+7yF/Fe2+Q5\njgjkGhqSdvgdN+85dYceiUUs/99j7mRFxHETkUjhjIwnLp41MtQIewAnxR017Khd\n1d+JC3h9a+Qu3NdOXwm6qtWs5GOeda8poSg4paGUdQKBgQDPX3nSp4GlPA2BFNFh\nP6EwsfpmQA5QdHZhPG8LyfZhKrUEeRVM41LMIpHGUoKmLqVfCm9Tsrr/K3dd6MBv\nZQSMIsQO9gKyFve5IMl4jr27wVXjFk5qVXSZA0KxTj48HFi1FCefCZZm8qSNlAr+\nMxZ+GaoAiwHx+ZOZPw2CW/ng3QKBgQC6dUEOhHbPGcC44rdDvOmpsPTmvigiRo8a\nsWNDrRmYk7RVoyOKeaxPxNjSZrLGaHthzUN9Td3Tkpss477VyebRbeVRi8OQpdzH\nGD6TsF+PDlb4jJuCbLpd6JkYUOOT2WoF2NmhLZWl6XA56M9/nRd7Iq2HSFZF/nk2\nY5aKAw++dwKBgGff72nxtiNKnYkXIHqSIO//dupZE9KBQ/sZBpblJ6Esf1gqPt0w\n0XynpFWvZvpPS078Lx/B26GN6FEGEb663zhDAepsmJUUpCn7nm/hMHEoOxlxRv5E\nqA8tbu7ZvprlqBmsatxjNQ+EY6D3kzoZ5R5tRJbZCrRmy+RrjRzLbbORAoGAM2S+\nWdIJLWxbwpo7CWC4xx0PY8pmJYxtRV4/jhfYRkXwHuqokTKYXCRV3yiPfkCuQXbi\nc1dTHU37l5Putd7A0FkKLD/p16TgBcCY/vxOWpAJSNj4xCpT9C54hEtHbykuIA51\nbgeyh9igJlYVW4dhQX99dRxrKz/JCUTJ6aCOZmECgYBUvbAFI0zF4pgSIR4PWrFb\n92tEiLtCRc1Hemlo/XWQrZFVRibn7kRrw6akaq396SuoNJEOmSrNJYfSR6W3Mb1t\n00Ygx2L29l5w7w9cBPvo2MlDYcwYccDu39NSRnCf4PLE97mDJtSFlMV33qcXNZeX\nUpmWxgOohDmVLKxB8Aht0w==\n-----END PRIVATE KEY-----\n",
+  "client_email": "agrohealth@agrohealth.iam.gserviceaccount.com",
+  "client_id": "112124947452051480161",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/agrohealth%40agrohealth.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

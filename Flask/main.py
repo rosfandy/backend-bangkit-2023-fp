@@ -12,15 +12,12 @@ model = tf.keras.models.load_model('./model_self_v2.h5')
 
 @app.route('/model/process', methods=['POST'])
 def predict():
-    # data = request.get_json()
+    data = request.get_json()
 
-    # image_url = data['image']
-    image_file = request.files['image']
+    image_url = data['url']
 
-    # response = requests.get(image_url)
-    # response = requests.get(image_file)
-    # image = Image.open(BytesIO(response.content))
-    image = Image.open(image_file)
+    response = requests.get(image_url)
+    image = Image.open(BytesIO(response.content))
 
     # Preprocess the image (resize, normalize, etc.)
     image = image.resize((150, 150))  # Example: resizing to 150x150 pixels
@@ -41,14 +38,18 @@ def predict():
 
     label = labels[predicted_class] if predicted_class < len(labels) else "No specific virus detected"
 
+    # Check if the predicted class is 18 (yellow leaf curl virus)
+    if predicted_class == 18:
+        return jsonify({
+            'message': 'Image received and processed successfully, but cannot be predicted.',
+            'predicted_class': int(predicted_class),
+        }), 500
+
     # Return the prediction result  
     return jsonify({
         'message': 'Image received and processed successfully.',
         'predicted_class': int(predicted_class),
-        'label': label
     })
-
-
 
 if __name__ == '__main__':
     app.run(port=5000)
