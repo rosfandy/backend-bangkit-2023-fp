@@ -25,12 +25,11 @@ exports.saveArticles = async (req,res)=>{
     const workbook = XLSX.readFile('C:/myfiles/MSIB/Bangkit/FP/List of hidroponic articles and solut.xlsx');
     const sheetName = workbook.SheetNames[nomor];
     const worksheet = workbook.Sheets[sheetName];
-    const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: ['id','title', 'url', 'gambar'] });
+    const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: ['namaLatin', 'deskripsi', 'solusi', 'class'] });
     jsonData.shift(); // Menghapus elemen pertama dari array jsonData
-    
-        
+    console.log(jsonData)
     for (const item of jsonData) {
-        const itemId = `${sheetName}-${item.id}`; // Menggunakan item.id sebagai ID dokumen
+        const itemId = `${sheetName}-${item.class}`; // Menggunakan item.id sebagai ID dokumen
         await firebase.createCollectionData(`${sheetName}`, item, itemId);
     }
     

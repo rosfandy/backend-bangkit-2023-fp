@@ -29,8 +29,6 @@ const upload = multer({
   },
 });
 
-
-
 // Apply the rate limiting 
 router.use('/api/predict', apiLimiter)
 

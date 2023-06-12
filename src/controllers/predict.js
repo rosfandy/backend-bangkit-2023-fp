@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { Storage } = require('@google-cloud/storage');
+const firebase = require('../firebase/firebase.module')
 
 const storage = new Storage({
   projectId: 'agrohealth',
@@ -12,10 +13,8 @@ exports.getPredict = async (req, res, next) => {
     return res.status(400).send('Tidak ada gambar yang diunggah.');
   }
   console.log(req.file)
-  // Membuat nama file unik untuk gambar yang diunggah
   const fileName = `${Date.now()}_${req.file.originalname.replace(/\s/g, '_')}`;
 
-  // Mengunggah gambar ke cloud storage
   const file = storage.bucket(bucketName).file(fileName);
   const blobStream = file.createWriteStream({
     metadata: {
@@ -28,21 +27,32 @@ exports.getPredict = async (req, res, next) => {
     res.status(500).send('Terjadi kesalahan saat mengunggah gambar.');
   });
 
-  blobStream.on('finish', () => {
+  blobStream.on('finish', async () => {
     const publicUrl = `https://storage.googleapis.com/${bucketName}/${file.name}`;
-    console.log(publicUrl);
-    
-    // Post publicUrl to /api/predict
+    const solutionArray = await firebase.getCollectionData("plantDisease");
+    console.log(solutionArray)
     axios
       .post('http://127.0.0.1:5000/model/process', { url: publicUrl })
       .then((response) => {
-        console.log(response.data);
-        res.status(200).json({ status: 200, data: response.data });
+        if (response.data.predicted_class) {
+          solutionArray.forEach(el => {
+            if (el.class === response.data.predicted_class) {
+              solution = el.solusi;
+              deskripsi = el.deskripsi;
+            }
+          });
+        }
+        const responseData = {
+          ...response.data,
+          diseaseSolution: solution,
+          diseaseDescription: deskripsi 
+        };
+
+        res.status(200).json({ status: 200, data: responseData});
       })
       .catch((error) => {
-        console.error(error);
+        console.error(error); 
         
-        // Delete the file from Cloud Storage on prediction failure
         file.delete().then(() => {
           console.log('File deleted successfully.');
         }).catch((deleteError) => {
