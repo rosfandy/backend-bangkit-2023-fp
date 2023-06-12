@@ -54,7 +54,7 @@ def predict():
     return jsonify({
         'message': 'Image received and processed successfully.',
         'predicted_class': int(predicted_class),
-        'diseaseName': label,
+        'label': label,
         'predictedAt': datetime.datetime.now().isoformat(),
     })
 

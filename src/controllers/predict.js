@@ -37,15 +37,17 @@ exports.getPredict = async (req, res, next) => {
         if (response.data.predicted_class) {
           solutionArray.forEach(el => {
             if (el.class === response.data.predicted_class) {
-              solution = el.solusi;
-              deskripsi = el.deskripsi;
+              diseaseSolution = el.solusi;
+              diseaseDescription = el.deskripsi;
+              diseaseName = el.namaLatin
             }
           });
         }
         const responseData = {
           ...response.data,
-          diseaseSolution: solution,
-          diseaseDescription: deskripsi 
+          diseaseName,
+          diseaseSolution,
+          diseaseDescription,
         };
 
         res.status(200).json({ status: 200, data: responseData});
