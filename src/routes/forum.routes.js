@@ -18,10 +18,10 @@ const forumController = require('../controllers/forum')
 const auth = require("../middleware/auth");
 
 // ENDPOINT
-router.post('/api/forum/user/posts', upload.single('image'), forumController.createPost)
+router.post('/api/forum/user/posts', upload.single('image'), auth.verifyToken, forumController.createPost)
 router.get('/api/forum/posts', forumController.getAllPost)
 router.get('/api/forum/:id/posts', forumController.getPostById)
-router.put('/api/forum/user/:id/posts', forumController.updatePost)
-router.delete('/api/forum/user/:id/posts', forumController.deletePost)
+router.put('/api/forum/user/:id/posts', auth.verifyToken, forumController.updatePost)
+router.delete('/api/forum/user/:id/posts', auth.verifyToken, forumController.deletePost)
 
 module.exports = router
