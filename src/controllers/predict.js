@@ -1,6 +1,8 @@
 const axios = require('axios');
 const { Storage } = require('@google-cloud/storage');
 const firebase = require('../firebase/firebase.module')
+const { v4: uuidv4 } = require('uuid');
+const moment = require('moment-timezone')
 
 const storage = new Storage({
   projectId: 'agrohealth',
@@ -9,6 +11,8 @@ const storage = new Storage({
 const bucketName = 'agrohealt-buckets';
 
 exports.getPredict = async (req, res, next) => {
+  const { email } = req.user;
+
   if (!req.file) {
     return res.status(400).send('Tidak ada gambar yang diunggah.');
   }
@@ -33,7 +37,7 @@ exports.getPredict = async (req, res, next) => {
     console.log(solutionArray)
     axios
       .post('http://127.0.0.1:5000/model/process', { url: publicUrl })
-      .then((response) => {
+      .then(async(response) => {
         if (response.data.predicted_class) {
           solutionArray.forEach(el => {
             if (el.class === response.data.predicted_class) {
@@ -49,6 +53,22 @@ exports.getPredict = async (req, res, next) => {
           diseaseSolution,
           diseaseDescription,
         };
+
+        // add history
+        const historyId = uuidv4();
+        const date = moment().tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm:ss')
+
+        const historyData = { 
+          historyId,
+          email: email,
+          diseaseName: diseaseName,
+          diseaseSolution: diseaseSolution,
+          diseaseDescription: diseaseDescription,
+          imageUrl: publicUrl, 
+          createdAt: date
+        };
+
+        await firebase.createCollectionData("history", historyData);
 
         res.status(200).json({ status: 200, data: responseData});
       })
