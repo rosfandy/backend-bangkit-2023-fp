@@ -1,8 +1,8 @@
 const axios = require('axios');
 const { Storage } = require('@google-cloud/storage');
-const firebase = require('../firebase/firebase.module')
+const firebase = require('../firebase/firebase.module');
 const { v4: uuidv4 } = require('uuid');
-const moment = require('moment-timezone')
+const moment = require('moment-timezone');
 
 const storage = new Storage({
   projectId: 'agrohealth',

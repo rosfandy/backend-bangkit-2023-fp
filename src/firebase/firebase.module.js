@@ -50,3 +50,32 @@ exports.updateCollectionData = async (collection, docID, data)=>{
       throw error;
     }
 }
+
+// get post by id
+exports.getPost = async (collection, docID) => {
+  try {
+    const docRef = db.collection(collection).doc(docID);
+    const doc = await docRef.get();
+
+    if (!doc.exists) {
+      throw new Error('Document does not exist.');
+    }
+
+    return { id: doc.id, ...doc.data() };
+  } catch (error) {
+    console.error('Error getting document:', error);
+    throw error;
+  }
+}
+
+// delete post
+exports.deletePost = async (collection, docID) => {
+  try {
+    const docRef = db.collection(collection).doc(docID);
+    await docRef.delete();
+    console.log(`Document with ID ${docID} in collection ${collection} successfully deleted.`);
+  } catch (error) {
+    console.error(`Error deleting document with ID ${docID} in collection ${collection}:`, error);
+    throw error;
+  }
+};
