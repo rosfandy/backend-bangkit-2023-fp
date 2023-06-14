@@ -41,10 +41,10 @@
 | --- | --- | --- | --- | --- | 
 | GET | `/api/articles` | Get Articles | no | ✅
 
-## `IP`
+## IP
 34.101.58.0
 
-### 1. `Refresh Token`
+### 1. Refresh Token
 **Endpoint**        : `/api/user/refreshtoken` <br>
 **Body Request**    : - <br>
 ***Authorization*** : Bearer Token  <br>
@@ -56,7 +56,7 @@
 }
 ```
 
-### 2. `Register`
+### 2. Register
 **Endpoint**        : `/api/user/register` <br>
 **Body Request**    : username, email, password <br>
 ***Authorization*** : -  <br>
@@ -69,7 +69,7 @@
 }
 ```
 
-### 3. `Login`
+### 3. Login
 **Endpoint**        : `/api/user/login` <br>
 **Body Request**    : email, password <br>
 ***Authorization*** : -  <br>
@@ -89,7 +89,7 @@
 }
 ```
 
-### 4. `Profile`
+### 4. Profile
 **Endpoint**        : `/api/user/profile` <br>
 **Body Request**    : - <br>
 ***Authorization*** : Bearer Token  <br>
@@ -109,7 +109,7 @@
 }
 ```
 
-### 5. `History`
+### 5. History
 **Endpoint**        : `/api/user/history` <br>
 **Body Request**    : email <br>
 ***Authorization*** : Bearer Token  <br>
@@ -134,7 +134,7 @@
 }
 ```
 
-### 6. `Predict`
+### 6. Predict
 **Endpoint**        : `/api/predict` <br>
 **Body Request**    : form-data image <br>
 ***Authorization*** : Bearer Token  <br>
@@ -155,7 +155,7 @@
 }
 ```
 
-### 7. `Articles`
+### 7. Articles
 **Endpoint**        : `/api/articles` <br>
 **Body Request**    : - <br>
 ***Authorization*** : -  <br>
@@ -216,7 +216,7 @@
 }
 ```
 
-### 8. `Create Post Forum`
+### 8. Create Post Forum
 **Endpoint**        : `/api/forum/user/posts` <br>
 **Body Request**    : form-data email, description, image <br>
 ***Authorization*** : Bearer Token  <br>
@@ -235,7 +235,7 @@
 }
 ```
 
-### 9. `Get All Post Forum`
+### 9. Get All Post Forum
 **Endpoint**        : `/api/forum/posts` <br>
 **Body Request**    : - <br>
 ***Authorization*** : -  <br>
@@ -272,7 +272,7 @@
 }
 ```
 
-### 10. `Get Post by Id`
+### 10. Get Post by Id
 **Endpoint**        : `/api/forum/:id/posts` <br>
 **Body Request**    : - <br>
 ***Authorization*** : -  <br>
@@ -292,7 +292,7 @@
 }
 ```
 
-### 11. `Update Post`
+### 11. Update Post
 **Endpoint**        : `/api/forum/user/:id/posts` <br>
 **Body Request**    : descript <br>
 ***Authorization*** : Bearer Token  <br>
@@ -305,7 +305,7 @@
 }
 ```
 
-### 12. `Delete Post`
+### 12. Delete Post
 **Endpoint**        : `/api/forum/user/:id/posts` <br>
 **Body Request**    : - <br>
 ***Authorization*** : Bearer Token  <br>
