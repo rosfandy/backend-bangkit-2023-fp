@@ -105,7 +105,7 @@ exports.updatePost = async (req,res) => {
         description = descript;
         const date = moment().tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm:ss');
         const newData = {
-            id,
+            // id,
             createdAt,
             modified: date,
             imageUrl,
