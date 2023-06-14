@@ -25,11 +25,11 @@
 ### 2. Forum Activity
 | Methods | Endpoints | Action | Authorization | Status |
 | --- | --- | --- | --- | --- |
-| GET | `/api/forum/:id/posts` | To get the post by id | no | ❌ 
-| GET |  `/api/forum/posts` | To get all post of forum | no | ❌
-| POST | `/api/forum/user/posts` | To create user  post | yes | ❌
-| PUT | `/api/forum/user/posts` | To update user post | yes | ❌
-| DELETE | `/api/forum/user/posts` | To delete user  post | yes | ❌
+| POST | `/api/forum/user/posts` | To create user  post | yes | ✅
+| GET |  `/api/forum/posts` | To get all post of forum | no | ✅
+| GET | `/api/forum/:id/posts` | To get the post by id | no | ✅ 
+| PUT | `/api/forum/user/:id/posts` | To update user post | yes | ✅
+| DELETE | `/api/forum/user/:id/posts` | To delete user  post | yes | ✅
 
 ### 3. Image Predict
 | Methods | Endpoints | Action | Authorization | Status |
@@ -41,10 +41,14 @@
 | --- | --- | --- | --- | --- | 
 | GET | `/api/articles` | Get Articles | no | ✅
 
-## `GET`
-#### 1.  `/api/user/refreshtoken` <br>
+## `IP`
+34.101.58.0
+
+### 1. `Refresh Token`
+**Endpoint**        : `/api/user/refreshtoken` <br>
 **Body Request**    : - <br>
 ***Authorization*** : Bearer Token  <br>
+**Method**          : POST <br>
 **Response** :
 ```JSON
 {
@@ -52,51 +56,267 @@
 }
 ```
 
-## `POST`
-#### 1.  `/api/user/register` <br>
+### 2. `Register`
+**Endpoint**        : `/api/user/register` <br>
 **Body Request**    : username, email, password <br>
 ***Authorization*** : -  <br>
+**Method**          : POST <br>
 **Response** :
 ```JSON
 {
     "status"  : 201,
-    "message" : "Register success ! "
+    "message" : "username ditambahkan !"
 }
 ```
-#### 2.  `/api/user/login` <br>
+
+### 3. `Login`
+**Endpoint**        : `/api/user/login` <br>
 **Body Request**    : email, password <br>
 ***Authorization*** : -  <br>
+**Method**          : POST <br>
 **Response** :
 ```JSON
 {
-    "status"  : 200,
     "message" : "Login success ! ",
+    "status"  : 200,
     "user"   : [
       {
+        "userId": "id",
         "email" : "mail@mail.com",
-        "username": "username",
         "token" : "token"
       }
     ]
 }
 ```
-#### 3.  `/api/predict` <br>
-**Body Request**    : form-data image
 
+### 4. `Profile`
+**Endpoint**        : `/api/user/profile` <br>
+**Body Request**    : - <br>
 ***Authorization*** : Bearer Token  <br>
+**Method**          : GET <br>
 **Response** :
 ```JSON
 {
-    "success": true,
+    "status": 200,
+    "message": "Data found",
     "data": {
-        "message": "Image received and processed successfully.",
-        "predicted_class": 5
-    },
-    "status": 200
+        "username": "username",
+        "email": "mail@mail.com",
+        "userId": "id",
+        "createdAt": "date",
+        "updatedAt": "date"
+    }
 }
 ```
 
+### 5. `History`
+**Endpoint**        : `/api/user/history` <br>
+**Body Request**    : email <br>
+***Authorization*** : Bearer Token  <br>
+**Method**          : GET <br>
+**Response** :
+```JSON
+{
+    "status": 200,
+    "message": "Success",
+    "data": [
+        {
+            "diseaseName": "diseaseName",
+            "createdAt": "date",
+            "historyId": "id",
+            "imageUrl": "https://example.jpg",
+            "diseaseSolution": "lorem ipsum",
+            "diseaseDescription": "lorem ipsum",
+            "email": "mail@mail.com",
+            "_id": "id"
+        }
+    ]
+}
+```
 
+### 6. `Predict`
+**Endpoint**        : `/api/predict` <br>
+**Body Request**    : form-data image <br>
+***Authorization*** : Bearer Token  <br>
+**Method**          : POST <br>
+**Response** :
+```JSON
+{
+    "status": 200,
+    "data": {
+        "label": "labelName",
+        "message": "Image received and processed successfully.",
+        "predictedAt": "date",
+        "predicted_class": 8,
+        "diseaseName": "diseaseName",
+        "diseaseSolution": "diseaseSolution",
+        "diseaseDescription": "diseaseDescription"
+    }
+}
+```
+
+### 7. `Articles`
+**Endpoint**        : `/api/articles` <br>
+**Body Request**    : - <br>
+***Authorization*** : -  <br>
+**Method**          : GET <br>
+**Response** :
+```JSON
+{
+    "total": "totalArticles",
+    "data": [
+        {
+            "articleType": [
+                {
+                    "length": "length",
+                    "data": [
+                        {
+                            "id": "id",
+                            "title": "titleName",
+                            "gambar": "https://example.jpg",
+                            "url": "https://example.jpg",
+                            "_id": "id"
+                        },
+                        {
+                            "id": "id",
+                            "title": "titleName",
+                            "gambar": "https://example.jpg",
+                            "url": "https://example.jpg",
+                            "_id": "id"
+                        },
+                        ...
+                    ]
+                }
+            ],
+            "articleType": [
+                {
+                    "length": "length",
+                    "data": [
+                        {
+                            "id": "id",
+                            "title": "titleName",
+                            "gambar": "https://example.jpg",
+                            "url": "https://example.jpg",
+                            "_id": "id"
+                        },
+                        {
+                            "id": "id",
+                            "title": "titleName",
+                            "gambar": "https://example.jpg",
+                            "url": "https://example.jpg",
+                            "_id": "id"
+                        },
+                        ...
+                    ]
+                }
+            ],
+            ...
+        }
+    ]
+}
+```
+
+### 8. `Create Post Forum`
+**Endpoint**        : `/api/forum/user/posts` <br>
+**Body Request**    : form-data email, description, image <br>
+***Authorization*** : Bearer Token  <br>
+**Method**          : POST <br>
+**Response** :
+```JSON
+{
+    "status": 200,
+    "message": "success to post",
+    "forumData": {
+        "email": "mail@mail.com",
+        "description": "description",
+        "imageUrl": "https://example.jpg",
+        "createdAt": "date"
+    }
+}
+```
+
+### 9. `Get All Post Forum`
+**Endpoint**        : `/api/forum/posts` <br>
+**Body Request**    : - <br>
+***Authorization*** : -  <br>
+**Method**          : GET <br>
+**Response** :
+```JSON
+{
+    "status": 200,
+    "message": "success",
+    "allPost": [
+        {
+            "createdAt": "date",
+            "imageUrl": "https://example.jpg",
+            "description": "description",
+            "email": "mail@mail.com",
+            "_id": "id"
+        },
+        {
+            "createdAt": "date",
+            "imageUrl": "https://example.jpg",
+            "email": "mail@mail.com",
+            "description": "description",
+            "modified": "date",
+            "_id": "id"
+        },
+        {
+            "createdAt": "date",
+            "imageUrl": "https://example.jpg",
+            "description": "description",
+            "email": "mail@mail.com",
+            "_id": "id"
+        }
+    ]
+}
+```
+
+### 10. `Get Post by Id`
+**Endpoint**        : `/api/forum/:id/posts` <br>
+**Body Request**    : - <br>
+***Authorization*** : -  <br>
+**Method**          : GET <br>
+**Response** :
+```JSON
+{
+    "status": 200,
+    "message": "success",
+    "allPost": {
+            "createdAt": "date",
+            "imageUrl": "https://example.jpg",
+            "description": "description",
+            "email": "mail@mail.com",
+            "_id": "id"
+        }
+}
+```
+
+### 11. `Update Post`
+**Endpoint**        : `/api/forum/user/:id/posts` <br>
+**Body Request**    : descript <br>
+***Authorization*** : Bearer Token  <br>
+**Method**          : PUT <br>
+**Response** :
+```JSON
+{
+    "status": 200,
+    "message": "success update"
+}
+```
+
+### 12. `Delete Post`
+**Endpoint**        : `/api/forum/user/:id/posts` <br>
+**Body Request**    : - <br>
+***Authorization*** : Bearer Token  <br>
+**Method**          : DELETE <br>
+**Response** :
+```JSON
+{
+    "status": 200,
+    "message": "success delete"
+}
+```
 
 ## Status Codes
 
