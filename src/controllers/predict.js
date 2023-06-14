@@ -34,11 +34,18 @@ exports.getPredict = async (req, res, next) => {
   blobStream.on('finish', async () => {
     const publicUrl = `https://storage.googleapis.com/${bucketName}/${file.name}`;
     const solutionArray = await firebase.getCollectionData("plantDisease");
-    console.log(solutionArray)
+    // console.log(solutionArray)
     axios
       .post('http://127.0.0.1:5000/model/process', { url: publicUrl })
       .then(async(response) => {
         if (response.data.predicted_class) {
+          console.log('prediced_class: ', response.data.predicted_class)
+          const pClass = response.data.predicted_class;
+          
+          if (pClass == 3 || pClass == 4 || pClass == 6 || pClass == 10 || pClass == 14 || pClass == 17 || pClass == 19 || pClass == 22 || pClass == 23 || pClass == 24 || pClass == 27 || pClass == 37) {
+            return res.status(200).json({ status: 200, data: 'Tanaman Sehat'});
+          }
+
           solutionArray.forEach(el => {
             if (el.class === response.data.predicted_class) {
               diseaseSolution = el.solusi;
@@ -47,11 +54,14 @@ exports.getPredict = async (req, res, next) => {
             }
           });
         }
+        
+        
         const responseData = {
           ...response.data,
           diseaseName,
           diseaseSolution,
           diseaseDescription,
+          imageUrl: publicUrl,  
         };
 
         // add history
