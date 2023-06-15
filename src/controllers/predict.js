@@ -76,7 +76,7 @@ exports.getPredict = async (req, res, next) => {
           diseaseDescription: diseaseDescription,
           imageUrl: publicUrl, 
           createdAt: date
-        };
+        }; 
 
         await firebase.createCollectionData("history", historyData);
         res.status(200).json({ status: 200, data: responseData});
