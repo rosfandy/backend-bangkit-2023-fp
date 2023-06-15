@@ -28,6 +28,7 @@
 | POST | `/api/forum/user/posts` | To create user  post | yes | ✅
 | GET |  `/api/forum/posts` | To get all post of forum | no | ✅
 | GET | `/api/forum/:id/posts` | To get the post by id | no | ✅ 
+| GET | `/api/forum/userposts` | Get posts user by email | yes | ✅
 | PUT | `/api/forum/user/:id/posts` | To update user post | yes | ✅
 | DELETE | `/api/forum/user/:id/posts` | To delete user  post | yes | ✅
 
