@@ -18,7 +18,7 @@ exports.getPredict = async (req, res, next) => {
   const file = storage.bucket(bucketName).file(fileName);
   const blobStream = file.createWriteStream({
     metadata: {
-      contentType: req.file.mimetype,
+      contentType: req.file.mimetype, 
     },
   });
 
@@ -49,7 +49,6 @@ exports.getPredict = async (req, res, next) => {
           diseaseSolution,
           diseaseDescription,
         };
-
         res.status(200).json({ status: 200, data: responseData});
       })
       .catch((error) => {
