@@ -35,6 +35,6 @@ router.use('/api/predict', apiLimiter)
 // Middleware
 const auth = require("../middleware/auth");
 
-router.post("/api/predict", upload.single('image'), predictController.getPredict)
+router.post("/api/predict", upload.single('image'), auth.verifyToken, predictController.getPredict)
 
 module.exports = router
