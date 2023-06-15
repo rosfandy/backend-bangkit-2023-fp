@@ -1,10 +1,7 @@
 const firebase = require('../firebase/firebase.module');
 const { Storage } = require('@google-cloud/storage');
-const { v4: uuidv4 } = require('uuid');
 const moment = require('moment-timezone');
-const filter = require("../firebase/firebase.query");
 
-// harusnya beda bucket ga sih
 const storage = new Storage({
     projectId: 'agrohealth',
     keyFilename: './agrohealth-8f1f41a8ea30.json',
@@ -13,10 +10,9 @@ const bucketName = 'agrohealth-forum';
 
 exports.createPost = async (req, res) => {
     try {
-        const { email,description } = req.body;
-        
-        let isEmail = validateEmail(email)
-        if(!isEmail) return res.status(400).json({message: "Email tidak valid !",status:400})
+        const { description } = req.body;
+        const { email } = req.user;
+
         if (!req.file) {
             const date = moment().tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm:ss');
             const forumData = {
@@ -33,10 +29,8 @@ exports.createPost = async (req, res) => {
                 forumData
             });
         }
-        // console.log(req.file)
 
         const fileName = `${Date.now()}_${req.file.originalname.replace(/\s/g, '_')}`;
-        
         const file = storage.bucket(bucketName).file(fileName);
         const blobStream = file.createWriteStream({
             metadata: {
@@ -50,12 +44,10 @@ exports.createPost = async (req, res) => {
         });
 
         blobStream.on('finish', async () => {
-            // const forumId = uuidv4();
             const date = moment().tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm:ss');
             const publicUrl = `https://storage.googleapis.com/${bucketName}/${file.name}`;
 
             const forumData = {
-                // forumId,
                 email,
                 description,
                 imageUrl: publicUrl,
@@ -142,7 +134,6 @@ exports.updatePost = async (req,res) => {
         description = descript;
         const date = moment().tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm:ss');
         const newData = {
-            // id,
             createdAt,
             modified: date,
             imageUrl,
@@ -153,7 +144,6 @@ exports.updatePost = async (req,res) => {
 
 
         const updatePost = await firebase.updateCollectionData('forum', id, newData);
-        // console.log(updatePost)
 
         return res.status(200).json({ 
             status: 200,
@@ -180,11 +170,4 @@ exports.deletePost = async (req,res) => {
         console.error(error);
         return res.status(500).json({ message: "Terjadi kesalahan pada server", status: 500 });
     }
-};
-
-
-function validateEmail(email) {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-  }
-  
+};  
