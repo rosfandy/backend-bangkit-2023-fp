@@ -292,7 +292,41 @@
 }
 ```
 
-### 11. Update Post
+### 11. Get Post by Email
+**Endpoint**        : `/api/forum/userposts` <br>
+**Body Request**    : - <br>
+***Authorization*** : Bearer Token  <br>
+**Method**          : GET <br>
+**Response** :
+```JSON
+{
+    "status": 200,
+    "message": "Data found",
+    "postsForum": [
+        {
+            "createdAt": "date",
+            "imageUrl": "https://example.jpg",
+            "description": "description",
+            "email": "mail@mail.com",
+            "_id": "id"
+        },
+        {
+            "createdAt": "date",
+            "description": "description",
+            "email": "mail@mail.com",
+            "_id": "id"
+        },
+        {
+            "createdAt": "date",
+            "description": "description",
+            "email": "mail@mail.com",
+            "_id": "id"
+        }
+    ]
+}
+```
+
+### 12. Update Post
 **Endpoint**        : `/api/forum/user/:id/posts` <br>
 **Body Request**    : descript <br>
 ***Authorization*** : Bearer Token  <br>
@@ -305,7 +339,7 @@
 }
 ```
 
-### 12. Delete Post
+### 13. Delete Post
 **Endpoint**        : `/api/forum/user/:id/posts` <br>
 **Body Request**    : - <br>
 ***Authorization*** : Bearer Token  <br>
