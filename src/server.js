@@ -36,7 +36,7 @@ const init = ()=>{
   let port = process.env.PORT || 8080;
   app.set("port", port);
   let server = http.createServer(app);
-  server.listen(port, '0.0.0.0');
+  server.listen(port, '0.0.0.0'); 
   server.on("listening", () => {
     console.log(`Server is listening on port ${port}`);
   });

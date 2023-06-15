@@ -20,7 +20,7 @@ exports.getCollectionData = async (collection,conditions)=> {
     }
 
     const docs = await docsRef.get();
-    docs.forEach(async (doc) => {
+    docs.forEach(async (doc) => { 
       mainDocs.push({ ...doc.data(), _id: doc.id });
     });
 

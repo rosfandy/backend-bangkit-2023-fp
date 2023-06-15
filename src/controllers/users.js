@@ -148,6 +148,14 @@ exports.refreshToken = async (req,res)=>{
   }
 } 
 
+exports.history = async(req,res)=>{
+  try {
+      
+  } catch (error) {
+    res.status(500).json({message:"Internal Server Error",status:500, error})
+  }
+}
+
 function createToken(userEmail) {
   const payload = { email: userEmail };
   const token = jwt.sign(payload, process.env.JWT_SECRET,{
