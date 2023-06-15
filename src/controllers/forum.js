@@ -1,7 +1,5 @@
 const firebase = require('../firebase/firebase.module');
-const db = require('../firebase/firebase.db');
 const { Storage } = require('@google-cloud/storage');
-const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 const moment = require('moment-timezone');
 const filter = require("../firebase/firebase.query");
@@ -15,11 +13,28 @@ const bucketName = 'agrohealth-forum';
 
 exports.createPost = async (req, res) => {
     try {
-        const { email,description,image } = req.body;
+        const { email,description } = req.body;
+        
+        let isEmail = validateEmail(email)
+        if(!isEmail) return res.status(400).json({message: "Email tidak valid !",status:400})
         if (!req.file) {
-            return res.status(400).send('Tidak ada gambar yang diunggah.');
+            const date = moment().tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm:ss');
+            const forumData = {
+                email,
+                description,
+                createdAt: date
+            };
+
+            await firebase.createCollectionData("forum", forumData);
+
+            return res.status(200).json({ 
+                status: 200,  
+                message: 'success to post',
+                forumData
+            });
         }
         // console.log(req.file)
+
         const fileName = `${Date.now()}_${req.file.originalname.replace(/\s/g, '_')}`;
         
         const file = storage.bucket(bucketName).file(fileName);
@@ -84,6 +99,7 @@ exports.getPostById = async (req,res) => {
     try {
         const { id } = req.params;
         const postById = await firebase.getPost('forum', id)
+
         return res.status(200).json({ 
             status: 200,
             message: 'success',
@@ -93,6 +109,27 @@ exports.getPostById = async (req,res) => {
     catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Terjadi kesalahan pada server", status: 500 });
+    }
+};
+
+exports.getPostByEmail = async (req, res) => {
+    try {
+      const { email } = req.user;
+      console.log("Email: ", email)
+      const postsForum = await firebase.getCollectionData("forum", { 
+              field: "email", 
+              operator: "==", 
+              value: email 
+      });
+      if (postsForum) {
+        return res.status(200).json({status:200, message: "Data found", postsForum });
+      } else {
+        return res.status(404).json({ message: "Post not found.", status: 404 });
+      }
+  
+    } catch (error) {
+      console.error("Error retrieving user profile:", error);
+      return res.status(500).json({ message: "Error retrieving user profile.", status: 500 });
     }
 };
 
@@ -144,3 +181,10 @@ exports.deletePost = async (req,res) => {
         return res.status(500).json({ message: "Terjadi kesalahan pada server", status: 500 });
     }
 };
+
+
+function validateEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  }
+  

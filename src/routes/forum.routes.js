@@ -21,6 +21,7 @@ const auth = require("../middleware/auth");
 router.post('/api/forum/user/posts', upload.single('image'), auth.verifyToken, forumController.createPost)
 router.get('/api/forum/posts', forumController.getAllPost)
 router.get('/api/forum/:id/posts', forumController.getPostById)
+router.get('/api/forum/userposts', auth.verifyToken, forumController.getPostByEmail)
 router.put('/api/forum/user/:id/posts', auth.verifyToken, forumController.updatePost)
 router.delete('/api/forum/user/:id/posts', auth.verifyToken, forumController.deletePost)
 
