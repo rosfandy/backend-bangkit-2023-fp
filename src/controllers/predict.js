@@ -63,7 +63,21 @@ exports.getPredict = async (req, res, next) => {
           diseaseDescription,
           imageUrl: publicUrl,  
         };
+        // add history
+        const historyId = uuidv4();
+        const date = moment().tz('Asia/Jakarta').format('YYYY-MM-DD HH:mm:ss')
 
+        const historyData = { 
+          historyId,
+          email: email,
+          diseaseName: diseaseName,
+          diseaseSolution: diseaseSolution,
+          diseaseDescription: diseaseDescription,
+          imageUrl: publicUrl, 
+          createdAt: date
+        }; 
+
+        await firebase.createCollectionData("history", historyData);
         res.status(200).json({ status: 200, data: responseData});
       })
       .catch((error) => {
