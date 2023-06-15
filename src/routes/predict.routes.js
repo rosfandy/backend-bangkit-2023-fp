@@ -30,7 +30,7 @@ const upload = multer({
 });
 
 // Apply the rate limiting 
-router.use('/api/predict', apiLimiter)
+// router.use('/api/predict', apiLimiter)
 
 // Middleware
 const auth = require("../middleware/auth");

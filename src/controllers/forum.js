@@ -71,21 +71,25 @@ exports.createPost = async (req, res) => {
     }
 };
 
-exports.getAllPost = async (req,res) => {
-    try {
-        const allPost = await firebase.getCollectionData('forum');
-        console.log(allPost);
-        return res.status(200).json({ 
-            status: 200,  
-            message: 'success',
-            allPost
-        });
-    }
-    catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: "Terjadi kesalahan pada server", status: 500 });
-    }
+exports.getAllPost = async (req, res) => {
+  try {
+    const allPost = await firebase.getCollectionData('forum');
+    const sortedPosts = allPost.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    console.log(sortedPosts);
+    return res.status(200).json({
+      status: 200,
+      message: 'success',
+      allPost: sortedPosts,
+    });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: 'Terjadi kesalahan pada server', status: 500 });
+  }
 };
+
+
 
 exports.getPostById = async (req,res) => {
     try {
