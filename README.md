@@ -11,7 +11,7 @@
 * [Firebase](https://firebase.google.com/) : This is a free open source NOSQL document database with scalability and flexibility. Data are stored in flexible JSON-like documents.
 
 ## Architecture
-[Architecture AgroHealth Application](./agroHealth-architectureCC.png)
+![Architecture AgroHealth Application](./agroHealth-architectureCC.png)
 
 ## Endpoint
 ### 1. Users Activity
