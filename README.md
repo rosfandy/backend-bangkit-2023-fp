@@ -1,6 +1,6 @@
 # Backend API
 
-### Technologies Used
+## Technologies Used
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
@@ -10,6 +10,8 @@
 * [ExpressJS](https://www.expresjs.org/) : This is a NodeJS web application framework.
 * [Firebase](https://firebase.google.com/) : This is a free open source NOSQL document database with scalability and flexibility. Data are stored in flexible JSON-like documents.
 
+## Architecture
+[Architecture AgroHealth Application](./agroHealth-architectureCC.png)
 
 ## Endpoint
 ### 1. Users Activity
